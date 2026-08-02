@@ -7,7 +7,6 @@ import com.financeflow.entity.User;
 import com.financeflow.exception.custom.ResourceNotFoundException;
 import com.financeflow.mapper.IncomeMapper;
 import com.financeflow.repository.IncomeRepository;
-import com.financeflow.repository.UserRepository;
 import com.financeflow.service.IncomeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class IncomeServiceImpl implements IncomeService {
 
     private final IncomeRepository incomeRepository;
     private final IncomeMapper incomeMapper;
-    private final UserRepository userRepository;
 
     @Override
     public void deleteIncome(Long id, User user) {
