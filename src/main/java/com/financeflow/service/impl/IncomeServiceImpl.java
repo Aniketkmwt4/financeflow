@@ -18,6 +18,12 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class IncomeServiceImpl implements IncomeService {
+
+
+    private final IncomeRepository incomeRepository;
+    private final IncomeMapper incomeMapper;
+    private final UserRepository userRepository;
+
     @Override
     public void deleteIncome(Long id, User user) {
 
@@ -28,10 +34,6 @@ public class IncomeServiceImpl implements IncomeService {
         incomeRepository.delete(income);
 
     }
-
-    private final IncomeRepository incomeRepository;
-    private final IncomeMapper incomeMapper;
-    private final UserRepository userRepository;
 
     @Override
     public IncomeResponse addIncome(IncomeRequest request, User user) {
