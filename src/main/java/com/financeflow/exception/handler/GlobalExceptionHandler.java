@@ -1,5 +1,6 @@
 package com.financeflow.exception.handler;
 
+import com.financeflow.exception.custom.BadRequestException;
 import com.financeflow.exception.custom.InvalidCredentialsException;
 import com.financeflow.exception.custom.ResourceAlreadyExistsException;
 import com.financeflow.exception.custom.ResourceNotFoundException;
@@ -121,4 +122,21 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(
+            BadRequestException ex,
+            HttpServletRequest request) {
+
+        ErrorResponse response = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 }
